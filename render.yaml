@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: magelle-portfolio
+    runtime: static
+    # Nothing to build — these are plain HTML/CSS/JS files.
+    buildCommand: ""
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: false
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=86400
+    routes:
+      - type: rewrite
+        source: /resume
+        destination: /assets/Magelle-Bellena-Resume.pdf
